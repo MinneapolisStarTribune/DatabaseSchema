@@ -154,12 +154,12 @@ class ezcDbSchema
      * @param string $format
      * @param string $file
      */
-    static public function createFromFile( $format, $file )
+    static public function createFromFile( $format, $file, $prependPrefix = false )
     {
         $className = ezcDbSchemaHandlerManager::getReaderByFormat( $format );
         $reader = new $className();
         self::checkSchemaReader( $reader, self::FILE );
-        return $reader->loadFromFile( $file );
+        return $reader->loadFromFile( $file, $prependPrefix );
     }
 
     /**
