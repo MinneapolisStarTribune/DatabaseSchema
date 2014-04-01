@@ -31,6 +31,24 @@
  */
 class ezcDatabaseSchemaGenericDiffTest extends ezcTestCase
 {
+    protected $db, $testFilesDir;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->testFilesDir = __DIR__.'/testfiles/';
+        $this->tempDir = $this->createTempDir( __CLASS__ );
+        try
+        {
+            $this->db = ezcDbInstance::get();
+        }
+        catch( Exception $e )
+        {
+            $this->markTestSkipped( 'Needs working DB connection to run this tests.' );
+        }
+        
+    }
+
     public function tearDown()
     {
         $this->removeTempDir();
