@@ -34,7 +34,11 @@ class ezcDatabaseSchemaPgSqlDiffTest extends ezcDatabaseSchemaGenericDiffTest
 {
     protected function resetDb()
     {
-        $tables = $this->db->query( "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'" )->fetchAll();
+        try {
+            $tables = $this->db->query( "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'" )->fetchAll();
+        } catch (\Exception $e) {
+            $this->markTestSkipped("No pgsql support");
+        }
         array_walk( $tables, create_function( '&$item,$key', '$item = $item[0];' ) );
 
         foreach ( $tables as $tableName )

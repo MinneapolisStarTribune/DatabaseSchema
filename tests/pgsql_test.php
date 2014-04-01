@@ -39,7 +39,7 @@ class ezcDatabaseSchemaPgsqlTest extends ezcDatabaseSchemaGenericTest
             $this->db = ezcDbInstance::get();
             if ($this->db->getName() != 'pgsql' ) 
             {
-                throw new Exception("Skiping tests for PostgreSQL");
+                throw new Exception("Skipping tests for PostgreSQL");
             }
             $this->testFilesDir = dirname( __FILE__ ) . '/testfiles/';
             $this->tempDir = $this->createTempDir( 'ezcDatabasePgSqlTest' );

@@ -34,7 +34,11 @@ class ezcDatabaseSchemaOracleDiffTest extends ezcDatabaseSchemaGenericDiffTest
 {
     protected function resetDb()
     {
-        $tables = $this->db->query( "SELECT table_name FROM user_tables" )->fetchAll();
+        try {
+            $tables = $this->db->query( "SELECT table_name FROM user_tables" )->fetchAll();
+        } catch (\Exception $e) {
+            $this->markTestSkipped("No oracle support");
+        }
         array_walk( $tables, create_function( '&$item,$key', '$item = $item[0];' ) );
 
         foreach ( $tables as $tableName )

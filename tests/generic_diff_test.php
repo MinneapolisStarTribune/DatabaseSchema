@@ -212,6 +212,40 @@ class ezcDatabaseSchemaGenericDiffTest extends ezcTestCase
         return ezcDbSchemaComparator::compareSchemas( self::getSchema3(), self::getSchema4() );
     }
 
+    private function getDiffExpectations1() {
+        return array (
+  0 => 'DROP INDEX \'tertiary\'',
+  1 => 'DROP INDEX \'bugdb_change_pri\'',
+  2 => 'ALTER TABLE \'bugdb_change\' DROP COLUMN \'integerfield1\'',
+  3 => 'ALTER TABLE \'bugdb_change\' CHANGE \'integerfield3\' \'integerfield3\' text(64)',
+  4 => 'ALTER TABLE \'bugdb_change\' ADD \'integerfield2\' integer NOT NULL DEFAULT 0',
+  5 => 'CREATE UNIQUE INDEX \'bugdb_change_pri\' ON \'bugdb_change\' ( \'integerfield2\' )',
+  6 => 'CREATE UNIQUE INDEX \'secondary\' ON \'bugdb_change\' ( \'integerfield3\' )',
+  7 => 'CREATE TABLE \'bugdb_added\' (
+	\'integerfield1\' integer
+)',
+  8 => 'DROP TABLE \'bugdb_deleted\'',
+);
+    }
+
+    private function getDiffExpectations2() {
+        return array (
+  0 => 'DROP INDEX \'join\'',
+  1 => 'DROP INDEX \'bugdb_change_pri\'',
+  2 => 'ALTER TABLE \'bugdb_change\' DROP COLUMN \'from\'',
+  3 => 'ALTER TABLE \'bugdb_change\' ADD \'group\' integer NOT NULL DEFAULT 0',
+  4 => 'CREATE UNIQUE INDEX \'bugdb_change_pri\' ON \'bugdb_change\' ( \'group\' )',
+  5 => 'CREATE UNIQUE INDEX \'from\' ON \'bugdb_change\' ( \'table\' )',
+  6 => 'CREATE TABLE \'order\' (
+	\'right\' integer
+)',
+  7 => 'DROP TABLE \'select\'',
+);
+    }
+
+    private function resetDb() {
+    }
+
     public function testWrite1()
     {
         $schema = self::getSchemaDiff1();
