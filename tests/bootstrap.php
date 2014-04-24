@@ -1,15 +1,5 @@
 <?php
-$autoload = realpath(__DIR__.'/../vendor/autoload.php');
-if(! file_exists($autoload)) {
-    $autoload = realpath(__DIR__.'/../../vendor/autoload.php');
-}
-if(! file_exists($autoload)) {
-    $autoload = realpath(__DIR__.'/../../../vendor/autoload.php');
-}
-if(! file_exists($autoload)) {
-    $autoload = realpath(__DIR__.'/../../../../vendor/autoload.php');
-}
-if ( ! @include $autoload )
+if ( ! @include __DIR__ . '/../vendor/autoload.php' )
 {
     die(<<<'EOT'
 You must set up the project dependencies, run the following commands:
