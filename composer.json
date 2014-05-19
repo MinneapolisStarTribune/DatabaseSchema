@@ -42,9 +42,32 @@
     "name": "zetacomponents/database-schema",
     "type": "library",
         "require": {
-            "zetacomponents/base": "*"
+        "php": ">=5.3.0",
+        "zetacomponents/base": "dev-initial-pull"
         },
         "require-dev": {
-            "zetacomponents/unit-test": "*"
-        }
+        "phpunit/phpunit": "4.0.*",
+        "zetacomponents/database": "dev-initial-pull",
+        "zetacomponents/persistent-object": "dev-initial-pull",
+        "zetacomponents/unit-test": "dev-initial-pull"
+        },
+    "repositories": [
+    {
+        "type": "git",
+        "url": "git@github.com:ewbarnard/Base.git"
+    },
+    {
+        "type": "git",
+        "url": "git@github.com:ewbarnard/Database.git"
+    },
+    {
+        "type": "git",
+        "url": "git@github.com:ewbarnard/PersistentObject.git"
+    },
+    {
+        "type": "git",
+        "url": "git@github.com:ewbarnard/UnitTest.git"
+    }
+    ],
+    "minimum-stability": "stable"
 }

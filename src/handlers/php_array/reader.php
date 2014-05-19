@@ -67,7 +67,7 @@ class ezcDbSchemaPhpArrayReader implements ezcDbSchemaFileReader, ezcDbSchemaDif
      * @param string $file
      * @return ezcDbSchema
      */
-    public function loadFromFile( $file )
+    public function loadFromFile( $file, $prependPrefix = false )
     {
         if ( !file_exists( $file ) )
         {
@@ -81,6 +81,20 @@ class ezcDbSchemaPhpArrayReader implements ezcDbSchemaFileReader, ezcDbSchemaDif
         }
         // @TODO: Add validator call here
 
+        /**
+         * Add prefix to table names 
+         */
+        if($prependPrefix) {
+            $tables = array();
+
+            $options = new ezcWorkflowDatabaseOptions;
+            $prefix = $options->prefix;
+            foreach($schema[0] as $key => $value) {
+                $newkey = $prefix.$key;
+                $tables[$newkey] = $value;
+            }
+            $schema[0] = $tables;
+        }
         return new ezcDbSchema( $schema[0], $schema[1] );
     }
     

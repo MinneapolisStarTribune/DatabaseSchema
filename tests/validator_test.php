@@ -31,15 +31,18 @@
  */
 class ezcDatabaseSchemaValidatorTest extends ezcTestCase
 {
+    protected $db;
+
     protected function setUp()
     {
+        parent::setUp();
         try
         {
             $this->db = ezcDbInstance::get();
         }
         catch ( Exception $e )
         {
-            $this->markTestSkipped();
+            $this->markTestSkipped($e->getMessage());
         }
 
     }
